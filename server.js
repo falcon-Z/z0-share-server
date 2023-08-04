@@ -2,7 +2,7 @@ const http = require("http");
 const dotenv = require("dotenv");
 
 const { app, logger } = require("./src/index.js");
-const connectToDB = require("./src/utils/db.js");
+const connectToDB = require("./src/utils/data/db.js");
 
 dotenv.config();
 
