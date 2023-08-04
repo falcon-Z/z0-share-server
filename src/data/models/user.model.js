@@ -25,6 +25,7 @@ const userSchema = new Schema(
     },
   },
   {
+    timestamps: true,
     query: {
       byEmail(email) {
         return this.where({ email });
