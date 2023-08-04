@@ -1,0 +1,27 @@
+{
+  "name": "z0-share-server",
+  "version": "0.0.1",
+  "description": "API for the Z0 share app",
+  "main": "index.ts",
+  "scripts": {
+    "test": "node ./server.js",
+    "dev": "nodemon ./server.js"
+  },
+  "type": "module",
+  "author": "Sai Madhan",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "pino": "^8.14.2",
+    "pino-http": "^8.3.3",
+    "pino-pretty": "^10.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.4.6",
+    "nodemon": "^3.0.1"
+  },
+  "volta": {
+    "node": "20.5.0",
+    "npm": "9.8.1"
+  }
+}
