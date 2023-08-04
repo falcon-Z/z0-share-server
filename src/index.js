@@ -1,14 +1,12 @@
-import express from "express";
-import { pinoHttp } from "pino-http";
-
-export const app = express();
-
-export const pino = pinoHttp({
+const express = require("express");
+const pino = require("pino-http").pinoHttp({
   transport: {
     target: "pino-pretty",
   },
 });
 
-export const logger = pino.logger;
+const logger = pino.logger;
 
-app.use(pino);
+const app = express();
+
+module.exports = { app, logger };
