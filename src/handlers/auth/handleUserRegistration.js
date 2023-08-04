@@ -32,28 +32,33 @@ function handleUserRegistration(req, res) {
     salt: salt,
   });
 
-  newUser
-    .save()
-    .then((user) => {
-      const { token, expiresIn } = issueToken(user);
-      res.status(200).json({
-        message: "User created",
-        user: {
-          id: user._id,
-          name: user.name,
-          email: user.email,
-        },
-        token: token,
-        expiresIn: expiresIn,
+  try {
+    newUser
+      .save()
+      .then((user) => {
+        const { token, expiresIn } = issueToken(user);
+        res.status(200).json({
+          message: "User created",
+          user: {
+            id: user._id,
+            name: user.name,
+            email: user.email,
+          },
+          token: token,
+          expiresIn: expiresIn,
+        });
+      })
+      .catch((err) => {
+        logger.error(err);
+        res.status(500).json({
+          message: "Error creating user",
+          error: err.message,
+        });
       });
-    })
-    .catch((err) => {
-      logger.error(err);
-      res.status(500).json({
-        message: "Error creating user",
-        error: err.message,
-      });
-    });
+  } catch (err) {
+    logger.error(err);
+    res.status(500).json({ message: "Internal server error" });
+  }
 }
 
 module.exports = handleUserRegistration;
