@@ -20,44 +20,45 @@ function handleUserRegistration(req, res) {
     res.status(400).json({
       message: "Missing name field",
     });
-  }
-  const { email, password, name } = req.body;
+  } else {
+    const { email, password, name } = req.body;
 
-  const { hash, salt } = generatePasswordHash(password);
+    const { hash, salt } = generatePasswordHash(password);
 
-  const newUser = new user({
-    name: name,
-    email: email,
-    hash: hash,
-    salt: salt,
-  });
+    const newUser = new user({
+      name: name,
+      email: email,
+      hash: hash,
+      salt: salt,
+    });
 
-  try {
-    newUser
-      .save()
-      .then((user) => {
-        const { token, expiresIn } = issueToken(user);
-        res.status(200).json({
-          message: "User created",
-          user: {
-            id: user._id,
-            name: user.name,
-            email: user.email,
-          },
-          token: token,
-          expiresIn: expiresIn,
+    try {
+      newUser
+        .save()
+        .then((user) => {
+          const { token, expiresIn } = issueToken(user);
+          res.status(200).json({
+            message: "User created",
+            user: {
+              id: user._id,
+              name: user.name,
+              email: user.email,
+            },
+            token: token,
+            expiresIn: expiresIn,
+          });
+        })
+        .catch((err) => {
+          logger.error(err);
+          res.status(500).json({
+            message: "Error creating user",
+            error: err.message,
+          });
         });
-      })
-      .catch((err) => {
-        logger.error(err);
-        res.status(500).json({
-          message: "Error creating user",
-          error: err.message,
-        });
-      });
-  } catch (err) {
-    logger.error(err);
-    res.status(500).json({ message: "Internal server error" });
+    } catch (err) {
+      logger.error(err);
+      res.status(500).json({ message: "Internal server error" });
+    }
   }
 }
 

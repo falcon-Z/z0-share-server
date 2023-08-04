@@ -16,18 +16,26 @@ const options = {
 
 module.exports = (passport) => {
   passport.use(
-    new JwtStrategy(options, function (jwt_payload, done) {
-      Users.findOne({ _id: jwt_payload.sub }, function (err, user) {
-        if (err) {
+    new JwtStrategy(options, (jwt_payload, done) => {
+      const _id = jwt_payload.sub;
+      console.log(_id);
+
+      Users.findById({ _id: _id })
+        .then((user) => {
+          console.log(user);
+          if (user._id) {
+            return done(null, {
+              _id: user._id.toString(),
+              name: user.name,
+              email: user.email,
+            });
+          }
+          return done(null, false);
+        })
+        .catch((err) => {
           logger.error(err);
           return done(err, false);
-        }
-        if (user) {
-          return done(null, user);
-        } else {
-          return done(null, false);
-        }
-      });
+        });
     })
   );
 };

@@ -3,9 +3,12 @@ const swagger = require("swagger-ui-dist").absolutePath();
 const passport = require("passport");
 const cors = require("cors");
 
+require("./data/models/user.model");
 require("./config/passportConfig")(passport);
 
 const authRouter = require("./routes/api/v1/auth");
+const userRouter = require("./routes/api/v1/users");
+
 const { pino } = require("./utils/logger");
 
 const app = express();
@@ -19,5 +22,6 @@ app.use(express.json());
 app.use(express.static(swagger));
 
 app.use("/api/v1/auth", authRouter);
+app.use("/api/v1/users", userRouter);
 
 module.exports = app;
