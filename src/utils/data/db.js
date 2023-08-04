@@ -1,5 +1,5 @@
 const db = require("mongoose");
-const { logger } = require("../../index.js");
+const { logger } = require("../../utils/logger");
 
 async function connectToDB() {
   try {
