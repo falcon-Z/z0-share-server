@@ -21,9 +21,7 @@ function handleUserRegistration(req, res) {
     });
   }
 
-  logger.info("handleUserRegistration: email: " + req.body.email);
-  logger.info("handleUserRegistration: password: " + req.body.password);
-  logger.info("handleUserRegistration: name: " + req.body.name);
+  console.log(req.body);
 
   const { email, password, name } = req.body;
 
