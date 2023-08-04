@@ -27,7 +27,7 @@ const userSchema = new Schema(
   {
     query: {
       byEmail(email) {
-        return this.where({ email: new RegExp(email, "i") });
+        return this.where({ email });
       },
     },
   }
