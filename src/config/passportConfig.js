@@ -2,7 +2,8 @@ const JwtStrategy = require("passport-jwt").Strategy;
 const ExtractJwt = require("passport-jwt").ExtractJwt;
 const fs = require("fs");
 const path = require("path");
-const user = require("../data/models/user.model");
+const Users = require("../data/models/user.model");
+const { logger } = require("../utils/logger");
 
 const pathToKey = path.join(__dirname, "../../", "id_rsa_pub.pem");
 const PUB_KEY = fs.readFileSync(pathToKey, "utf8");
@@ -16,9 +17,9 @@ const options = {
 module.exports = (passport) => {
   passport.use(
     new JwtStrategy(options, function (jwt_payload, done) {
-      User.findOne({ _id: jwt_payload.sub }, function (err, user) {
+      Users.findOne({ _id: jwt_payload.sub }, function (err, user) {
         if (err) {
-          console.error(err);
+          logger.error(err);
           return done(err, false);
         }
         if (user) {

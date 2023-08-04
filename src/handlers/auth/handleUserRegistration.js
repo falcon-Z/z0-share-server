@@ -1,6 +1,7 @@
 const generatePasswordHash = require("../../utils/auth/generatePasswordHash");
 const user = require("../../data/models/user.model.js");
 const { logger } = require("../../utils/logger");
+const issueToken = require("../../utils/auth/issueToken");
 
 function handleUserRegistration(req, res) {
   if (!req.body) {
@@ -20,9 +21,6 @@ function handleUserRegistration(req, res) {
       message: "Missing name field",
     });
   }
-
-  console.log(req.body);
-
   const { email, password, name } = req.body;
 
   const { hash, salt } = generatePasswordHash(password);
@@ -34,18 +32,28 @@ function handleUserRegistration(req, res) {
     salt: salt,
   });
 
-  try {
-    newUser.save().then((user) => {
+  newUser
+    .save()
+    .then((user) => {
+      const { token, expiresIn } = issueToken(user);
       res.status(200).json({
         message: "User created",
-        user: user,
+        user: {
+          id: user._id,
+          name: user.name,
+          email: user.email,
+        },
+        token: token,
+        expiresIn: expiresIn,
+      });
+    })
+    .catch((err) => {
+      logger.error(err);
+      res.status(500).json({
+        message: "Error creating user",
+        error: err.message,
       });
     });
-  } catch (err) {
-    res.status(500).json({
-      message: "Error creating user",
-    });
-  }
 }
 
 module.exports = handleUserRegistration;
