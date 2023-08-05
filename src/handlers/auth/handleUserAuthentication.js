@@ -27,7 +27,7 @@ function handleUserAuthentication(req, res) {
         .exec()
         .then((user) => {
           if (!user) {
-            logger.error("User not found");
+            logger.error("Email doesnt exist");
             return res.status(404).json({ message: "User not found" });
           }
 
