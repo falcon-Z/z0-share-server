@@ -8,6 +8,7 @@ require("./config/passportConfig")(passport);
 
 const authRouter = require("./routes/api/v1/auth");
 const userRouter = require("./routes/api/v1/users");
+const postsRouter = require("./routes/api/v1/posts");
 
 const { pino } = require("./utils/logger");
 
@@ -23,5 +24,6 @@ app.use(express.static(swagger));
 
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/users", userRouter);
+app.use("/api/v1/posts", postsRouter);
 
 module.exports = app;

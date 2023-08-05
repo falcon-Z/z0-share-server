@@ -7,22 +7,19 @@ const postSchema = new Schema(
     title: {
       type: String,
       required: true,
-      index: true,
     },
     imageUri: {
       type: String,
       required: true,
       trim: true,
       lowercase: true,
-      unique: true,
     },
     tags: {
       type: [String],
-      required: true,
       trim: true,
       lowercase: true,
     },
-    author: {
+    createdBy: {
       type: db.Schema.Types.ObjectId,
       ref: "User",
       required: true,
