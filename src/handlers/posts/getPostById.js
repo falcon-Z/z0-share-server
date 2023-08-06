@@ -13,7 +13,7 @@ function getPostById(req, res) {
   try {
     posts
       .findById({ _id: id })
-      .populate("createdBy", "likes", "commentedBy")
+      .populate("createdBy", "likes")
       .then((post) => {
         if (post) {
           res.status(200).json(post);
@@ -22,7 +22,8 @@ function getPostById(req, res) {
             message: "Post not found",
           });
         }
-      });
+      })
+      .catch((err) => res.status(500).json({ message: "Database Error" }));
   } catch (err) {
     logger.error(err);
     res.status(500).json({ message: "Internal server error" });

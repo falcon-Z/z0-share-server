@@ -4,6 +4,7 @@ const passport = require("passport");
 const cors = require("cors");
 
 require("./data/models/user.model");
+require("./data/models/post.model");
 require("./config/passportConfig")(passport);
 
 const authRouter = require("./routes/api/v1/auth");

@@ -17,11 +17,17 @@ function createNewPost(req, res) {
   });
 
   try {
-    newPost.save().then((post) => {
-      return res
-        .status(201)
-        .json({ message: "Post created successfully", post });
-    });
+    newPost
+      .save()
+      .then((post) => {
+        return res
+          .status(201)
+          .json({ message: "Post created successfully", post });
+      })
+      .catch((err) => {
+        logger.error(err);
+        return res.status(500).json({ message: "Database error" });
+      });
   } catch (err) {
     logger.error(err);
     return res.status(500).json({ message: "Internal server error" });
