@@ -25,8 +25,8 @@ const postSchema = new Schema(
       required: true,
     },
     likes: {
-      type: [db.Schema.Types.ObjectId],
-      ref: "User",
+      type: Number,
+      default: 0,
     },
     comments: [
       {
@@ -45,24 +45,6 @@ const postSchema = new Schema(
     query: {
       byAuthor(authorId) {
         return this.where({ createdBy: authorId });
-      },
-    },
-
-    methods: {
-      countLikes() {
-        return this.likes.length;
-      },
-
-      handleLikes(userId) {
-        const index = this.likes.indexOf(userId);
-
-        if (index > -1) {
-          this.likes.splice(index, 1);
-          return { liked: false, likesCount: this.likes.length };
-        } else {
-          this.likes.push(userId);
-          return { liked: true, likesCount: this.likes.length };
-        }
       },
     },
   }
