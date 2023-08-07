@@ -4,6 +4,7 @@ const getAllPosts = require("../../../handlers/posts/getAllPosts");
 const getPostById = require("../../../handlers/posts/getPostById");
 const getPostLikes = require("../../../handlers/posts/getPostLikes");
 const handleLikes = require("../../../handlers/posts/handleLikes");
+const createNewComment = require("../../../handlers/posts/createNewComment");
 
 const router = require("express").Router();
 
@@ -23,5 +24,11 @@ router.post(
   handleLikes
 );
 router.get("/:id/likes", getPostLikes);
+
+router.post(
+  "/:id/comment",
+  passport.authenticate("jwt", { session: false }),
+  createNewComment
+);
 
 module.exports = router;
