@@ -30,6 +30,12 @@ git clone https://github.com/falcon-Z/z0-share-server.git
   MONGODB_URI=//Database URI
   PORT=3002 // Recommend changing port from default 3000
 ```
+#### Generate Keys
+```
+  npm run generate:keypair
+```
+
+This command will generate a cryptography secure random Public Key and Private key used to sign and encrypt JWT tokens required for authentication
 
 #### Install Dependencies with command
 ```
