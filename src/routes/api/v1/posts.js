@@ -5,7 +5,6 @@ const getPostById = require("../../../handlers/posts/getPostById");
 const getPostLikes = require("../../../handlers/posts/getPostLikes");
 const handleLikes = require("../../../handlers/posts/handleLikes");
 const createNewComment = require("../../../handlers/posts/createNewComment");
-const { route } = require("./auth");
 const getAllComents = require("../../../handlers/posts/getAllComments");
 
 const router = require("express").Router();
@@ -17,7 +16,6 @@ router.post(
 );
 
 router.get("/", getAllPosts);
-
 router.get("/:id", getPostById);
 
 router.get("/:id/likes", getPostLikes);

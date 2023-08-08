@@ -6,7 +6,7 @@ async function getAllPosts(req, res) {
     const allposts = await posts
       .find()
       .populate("createdBy")
-      .sortPosts()
+      .sort({ createdAt: -1 })
       .populate("comments.commentBy")
       .exec();
     res.status(200).json({ posts: allposts });

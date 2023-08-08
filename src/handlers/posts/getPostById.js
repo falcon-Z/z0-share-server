@@ -14,7 +14,6 @@ async function getPostById(req, res) {
     const post = await posts
       .findById(id)
       .populate("createdBy")
-      .sortPosts()
       .populate("comments.commentBy")
       .exec();
     res.status(200).json({ post: post });
