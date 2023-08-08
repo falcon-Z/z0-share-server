@@ -1,3 +1,11 @@
+# Z0-Share Backend
+
+This Repo contains backend code for Z0-Share A social sharing platform built with MERN stack
+
+#### Source code for frontend
+You could find source code for the frontend on [falcon-Z/z0-share](https://github.com/falcon-Z/z0-share)
+
+
 # Project Setup
 
 Built with Express and mongoDB 
