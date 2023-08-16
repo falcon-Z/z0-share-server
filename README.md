@@ -1,76 +1,85 @@
 # Z0-Share Backend
 
-This Repo contains backend code for Z0-Share A social sharing platform built with MERN stack
+This repository contains the backend code for Z0-Share, a social sharing platform built using the MERN stack.
 
-#### Source code for frontend
-You could find source code for the frontend on [falcon-Z/z0-share](https://github.com/falcon-Z/z0-share)
+For the frontend source code, you can find it at [falcon-Z/z0-share](https://github.com/falcon-Z/z0-share).
 
+## Project Overview
 
-# Project Setup
+Z0-Share Backend is developed using Express and MongoDB, forming the foundation of the social sharing platform. This backend seamlessly interacts with the frontend to deliver a complete user experience.
 
-Built with Express and mongoDB 
+### Setup
 
-Requires the following for setup
-- MongoDB - Database URI
-- Volta (Optional) - for node version Management
+Before you dive into the code, make sure you have the following prerequisites set up:
 
-  Recommend Setting up Volta for Node version Management. It
-  automatically picks up on the version of Node.Js used for Development or you
-  could find the same inside package.json file under volta section
-  Read More about Volta on [Volta Setup](https://volta.sh)
-  
-If you are using Linux or WSL on windows setup volta through the following
-command
+- MongoDB: Make sure you have a valid MongoDB database URI to connect to.
+- (Optional) Volta: I recommend using Volta for Node version management. It automatically adapts to the Node.js version used for development. You can find more information about Volta's setup [here](https://volta.sh).
 
-```
-  curl '<https://get.volta.sh>" | bash
+If you're using Linux or WSL on Windows, you can install Volta using the provided command:
+
+```bash
+curl https://get.volta.sh | bash
 ```
 
-### Follow these instructions to Setup the Project
+Now, let's get started with the project setup:
 
-#### Clone Repository from Github
-```
+### Clone the Repository
+
+```bash
 git clone https://github.com/falcon-Z/z0-share-server.git
 ```
-#### Environment Variables
-  The following environment variables are required
-```
-  MONGODB_URI=//Database URI
-  PORT=3002 // Recommend changing port from default 3000
-```
-#### Generate Keys
-```
-  npm run generate:keypair
+
+### Environment Variables
+
+To run the backend server, set the following environment variables:
+
+```env
+MONGODB_URI=YOUR_DATABASE_URI_HERE
+PORT=3002  # I recommend changing the port from the default 3000
 ```
 
-This command will generate a cryptography secure random Public Key and Private key used to sign and encrypt JWT tokens required for authentication
+### Generate Keys
 
-#### Install Dependencies with command
-```
-  npm i
-```
+Generate secure random keys required for JWT token handling:
 
-#### Run the development server with
-```
-  npm run dev
+```bash
+npm run generate:keypair
 ```
 
-> Be sure to run the server Before running the front end
+These keys will be used for signing and encrypting JWT tokens necessary for authentication.
+
+### Install Dependencies
+
+Install the required project dependencies using:
+
+```bash
+npm install
+```
+
+### Run the Development Server
+
+Start the development server with:
+
+```bash
+npm run dev
+```
+
+Make sure to run the backend server before launching the frontend.
 
 ## Quick API Reference
 
 - Root: `/api/v1`
-  - `/auth` - for user authentication
-    - `POST /register` - creates a new user account with email, password and name
-    - `POST /login` - verifies the user credentials and returns a JWT
+  - `/auth` - User authentication
+    - `POST /register` - Create a new user account with email, password, and name
+    - `POST /login` - Verify user credentials and return a JWT token
   - `/user`
-    - `GET /me` - returns information about the current user and issues a JWT
-    - `GET /:id` - returns information about the user with the given id
+    - `GET /me` - Retrieve information about the current user and issue a JWT token
+    - `GET /:id` - Retrieve information about the user with the given ID
   - `/posts`
-    - `POST /` - creates a new post with the current user as the author (requires authorization)
-    - `GET /` - returns all posts
-    - `GET /:id` - returns the post with the given id
-    - `GET /:postId/likes` - returns the number of likes for the post with the given id
-    - `POST /:postId/like` - adds a like to the post with the given id (requires authorization)
-    - `GET /:postId/comments` - returns all comments for the post with the given id
-    - `POST /:postId/comment` - adds a comment to the post with the given id (requires authorization)
+    - `POST /` - Create a new post with the current user as the author (requires authorization)
+    - `GET /` - Retrieve all posts
+    - `GET /:id` - Retrieve the post with the given ID
+    - `GET /:postId/likes` - Retrieve the number of likes for the post with the given ID
+    - `POST /:postId/like` - Add a like to the post with the given ID (requires authorization)
+    - `GET /:postId/comments` - Retrieve all comments for the post with the given ID
+    - `POST /:postId/comment` - Add a comment to the post with the given ID (requires authorization)
