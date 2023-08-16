@@ -5,6 +5,7 @@ Welcome to the documentation for Z0-Share, a dynamic social sharing platform bui
 ## Project Repositories
 
 **Frontend:** [falcon-Z/z0-share](https://github.com/falcon-Z/z0-share)
+
 **Server:** [falcon-Z/z0-share-server](https://github.com/falcon-Z/z0-share-server)
 
 ## Project Challenges and Security Measures
